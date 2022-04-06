@@ -25,6 +25,8 @@ SuperTokens.init({
         appName: "SuperTokens Demo App", // TODO: Your app name
         apiDomain: getApiDomain(), // TODO: Change to your app's API domain
         websiteDomain: getWebsiteDomain(), // TODO: Change to your app's website domain
+        apiBasePath: "/api",
+        websiteBasePath: "/auth"
     },
     recipeList: [
         EmailPassword.init({

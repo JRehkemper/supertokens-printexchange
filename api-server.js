@@ -11,21 +11,23 @@ let EmailPassword = require("supertokens-node/recipe/emailpassword");
 require('dotenv').config()
 
 const apiPort = process.env.REACT_APP_API_PORT || 3001;
-const apiDomain = process.env.REACT_APP_API_URL || `http://localhost:${apiPort}`;
+const apiDomain = process.env.REACT_APP_API_URL || `https://jrehkemper.de/auth/`;
 const websitePort = process.env.REACT_APP_WEBSITE_PORT || 3000;
-const websiteDomain = process.env.REACT_APP_WEBSITE_URL || `http://localhost:${websitePort}`;
+const websiteDomain = process.env.REACT_APP_WEBSITE_URL || `https://jrehkemper.de/auth`;
 
 supertokens.init({
     framework: "express",
     supertokens: {
         // TODO: This is a core hosted for demo purposes. You can use this, but make sure to change it to your core instance URI eventually.
-        connectionURI: "https://try.supertokens.com", //"http://10.0.11.77:3567",
+        connectionURI: "http://supertokens-mysql:3567", //"http://10.0.11.77:3567",
         //apiKey: "<REQUIRED FOR MANAGED SERVICE, ELSE YOU CAN REMOVE THIS FIELD>",
     },
     appInfo: {
-        appName: "SuperTokens Demo App", // TODO: Your app name
+        appName: "3D PrintExchange", // TODO: Your app name
         apiDomain, // TODO: Change to your app's API domain
         websiteDomain, // TODO: Change to your app's website domain
+        apiBasePath: "/api",
+        websiteBasePath: "/auth"
     },
     recipeList: [EmailPassword.init(), Session.init()],
 });
@@ -34,7 +36,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: 'http://localhost:3000', // TODO: Change to your app's website domain
+        origin: 'https://auth.jrehkemper.de/', // TODO: Change to your app's website domain
         allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
         //methods: ["GET", "PUT", "POST", "DELETE"],
         credentials: true,
