@@ -38,7 +38,7 @@ app.use(
     cors({
         origin: 'https://auth.jrehkemper.de/', // TODO: Change to your app's website domain
         allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
-        //methods: ["GET", "PUT", "POST", "DELETE"],
+        methods: ["GET", "PUT", "POST", "DELETE"],
         credentials: true,
     })
 );
@@ -52,7 +52,7 @@ app.use(
 app.use(middleware());
 
 // custom API that requires session verification
-app.get("/sessioninfo", verifySession(), async (req, res) => {
+app.get("/api/sessioninfo", verifySession(), async (req, res) => {
     let session = req.session;
     res.send({
         sessionHandle: session.getHandle(),
@@ -67,4 +67,4 @@ app.use((err, req, res, next) => {
     res.status(500).send("Internal error: " + err.message);
 });
 
-app.listen(apiPort, () => console.log(`API Server listening on port ${apiPort} + ${websiteDomain}`));
+app.listen(apiPort, () => console.log(`API Server listening on port ${apiPort}`));

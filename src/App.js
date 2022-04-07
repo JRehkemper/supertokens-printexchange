@@ -33,8 +33,19 @@ SuperTokens.init({
             emailVerificationFeature: {
                 mode: "REQUIRED",
             },
+            getRedirectionURL: async (context) => {
+                if (context.action === "SUCCESS") {
+                    if (context.redirectToPath !== undefined) {
+                        return context.redirectToPath;
+                    }
+                    return "https://jrehkemper.de";
+                }
+                return undefined
+            }
         }),
-        Session.init(),
+        Session.init({
+            sessionScope: ".jrehkemper.de"
+        }),
     ],
 });
 
